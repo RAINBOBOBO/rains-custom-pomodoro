@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpx3bks84mu5k"]
+
+[ext_resource type="Script" path="res://time_box.gd" id="1_wk1ra"]
+
+[node name="TimeBox" type="LineEdit"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "00"
+alignment = 1
+max_length = 2
+caret_blink = true
+caret_blink_interval = 0.5
+script = ExtResource("1_wk1ra")
+
+[connection signal="focus_exited" from="." to="." method="_on_focus_exited"]

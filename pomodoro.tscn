@@ -1,0 +1,150 @@
+[gd_scene load_steps=7 format=3 uid="uid://fxc08qi55w13"]
+
+[ext_resource type="Script" path="res://pomodoro.gd" id="1_ahdmq"]
+[ext_resource type="PackedScene" uid="uid://cpx3bks84mu5k" path="res://time_box.tscn" id="1_qlhwj"]
+[ext_resource type="Script" path="res://inputs.gd" id="2_g2p2r"]
+[ext_resource type="Script" path="res://time_clear_button.gd" id="3_reljk"]
+[ext_resource type="Texture2D" uid="uid://b8qs6ahcxjdmj" path="res://progressunder.png" id="5_s3xag"]
+[ext_resource type="Texture2D" uid="uid://cmiaw0e0a1rr0" path="res://progress.png" id="6_trpdq"]
+
+[node name="Pomodoro" type="Node2D"]
+script = ExtResource("1_ahdmq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="TitleMarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+
+[node name="Title" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "POMODORO"
+
+[node name="Inputs" type="VBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_g2p2r")
+
+[node name="InputsSubtitle" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs"]
+layout_mode = 2
+text = "How long would you like to work?"
+horizontal_alignment = 1
+
+[node name="TimeInputContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TimeBoxHours" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer/HBoxContainer" instance=ExtResource("1_qlhwj")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimeBoxMins" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer/HBoxContainer" instance=ExtResource("1_qlhwj")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimeBoxSecs" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer/HBoxContainer" instance=ExtResource("1_qlhwj")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimeClearButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear"
+script = ExtResource("3_reljk")
+
+[node name="FormatHint" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs"]
+layout_mode = 2
+text = "( HH : MM : SS )"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs"]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="TimeError" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartMarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/margin_bottom = 100
+
+[node name="StartButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/Inputs/StartMarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "START"
+
+[node name="TimerDisplay" type="VBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="TimerSubtitle" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay"]
+layout_mode = 2
+text = "Keep up the good work"
+horizontal_alignment = 1
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay"]
+layout_mode = 2
+size_flags_horizontal = 4
+fill_mode = 4
+texture_under = ExtResource("5_s3xag")
+texture_progress = ExtResource("6_trpdq")
+
+[node name="TimeRemaining" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay"]
+layout_mode = 2
+text = "Time remaining: 00:00:00"
+horizontal_alignment = 1
+
+[node name="TimerControls" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PauseButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls"]
+layout_mode = 2
+text = "Pause"
+
+[node name="ResetButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls"]
+layout_mode = 2
+text = "Reset"
+
+[node name="StopButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls"]
+layout_mode = 2
+text = "Stop
+"
+
+[node name="Finished" type="VBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="submit_time" from="." to="." method="_on_submit_time"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer/HBoxContainer/TimeClearButton" to="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer/HBoxContainer/TimeClearButton" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/Inputs/StartMarginContainer/StartButton" to="CanvasLayer/PanelContainer/VBoxContainer/Inputs" method="_on_start_button_pressed"]
