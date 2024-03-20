@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://fxc08qi55w13"]
+[gd_scene load_steps=9 format=3 uid="uid://fxc08qi55w13"]
 
 [ext_resource type="Script" path="res://pomodoro.gd" id="1_ahdmq"]
 [ext_resource type="PackedScene" uid="uid://cpx3bks84mu5k" path="res://time_box.tscn" id="1_qlhwj"]
 [ext_resource type="Script" path="res://inputs.gd" id="2_g2p2r"]
 [ext_resource type="Script" path="res://time_clear_button.gd" id="3_reljk"]
-[ext_resource type="Texture2D" uid="uid://b8qs6ahcxjdmj" path="res://progressunder.png" id="5_s3xag"]
+[ext_resource type="Script" path="res://timer_display.gd" id="5_2vo4i"]
 [ext_resource type="Texture2D" uid="uid://cmiaw0e0a1rr0" path="res://progress.png" id="6_trpdq"]
+[ext_resource type="Script" path="res://pomodoro_timer.gd" id="7_706jc"]
+[ext_resource type="Script" path="res://finished.gd" id="8_dbdf6"]
 
 [node name="Pomodoro" type="Node2D"]
 script = ExtResource("1_ahdmq")
@@ -102,22 +104,33 @@ theme_override_font_sizes/font_size = 40
 text = "START"
 
 [node name="TimerDisplay" type="VBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
+script = ExtResource("5_2vo4i")
 
 [node name="TimerSubtitle" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay"]
 layout_mode = 2
 text = "Keep up the good work"
 horizontal_alignment = 1
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 fill_mode = 4
-texture_under = ExtResource("5_s3xag")
+texture_under = ExtResource("6_trpdq")
 texture_progress = ExtResource("6_trpdq")
+tint_under = Color(0.423529, 0.423529, 0.423529, 1)
+tint_progress = Color(0.0862745, 0.729412, 0.196078, 1)
 
 [node name="TimeRemaining" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Time remaining: 00:00:00"
 horizontal_alignment = 1
@@ -127,24 +140,73 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="PauseButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Pause"
 
 [node name="ResetButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Reset"
 
 [node name="StopButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Stop
 "
 
 [node name="Finished" type="VBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("8_dbdf6")
 
-[node name="Timer" type="Timer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
 
-[connection signal="submit_time" from="." to="." method="_on_submit_time"]
+[node name="Encouragement" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Great job! You are such a good worker. This outfit is very flattering. You have a lot of gravitas. Your jawline is extrordinary. You're a nice height. Your energy is electric."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished"]
+layout_mode = 2
+theme_override_constants/margin_top = 100
+
+[node name="Exercise" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished/MarginContainer2"]
+layout_mode = 2
+text = "Now do 10 push ups."
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 100
+
+[node name="DoneButton" type="Button" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished/MarginContainer3"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "Done!"
+
+[node name="PomodoroTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_706jc")
+
 [connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer/HBoxContainer/TimeClearButton" to="CanvasLayer/PanelContainer/VBoxContainer/Inputs/TimeInputContainer/HBoxContainer/TimeClearButton" method="_on_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/Inputs/StartMarginContainer/StartButton" to="CanvasLayer/PanelContainer/VBoxContainer/Inputs" method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls/PauseButton" to="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls/ResetButton" to="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls/StopButton" to="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay" method="_on_stop_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/Finished/MarginContainer3/DoneButton" to="CanvasLayer/PanelContainer/VBoxContainer/Finished" method="_on_done_button_pressed"]
+[connection signal="timeout" from="PomodoroTimer" to="PomodoroTimer" method="_on_timeout"]

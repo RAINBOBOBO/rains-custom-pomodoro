@@ -14,3 +14,7 @@ config/name="Custom Pomodoro"
 run/main_scene="res://pomodoro.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+EventBus="*res://event_bus.gd"

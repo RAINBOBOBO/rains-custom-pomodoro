@@ -3,9 +3,9 @@ extends VBoxContainer
 const CONFIRM_TEXT = "Are you sure that's how long you want to work?"
 const NO_INPUT_TEXT = "You haven't entered a time."
 
-var hours: int = 0
-var minutes: int = 0
-var seconds: int = 0
+var hours: float = 0
+var minutes: float = 0
+var seconds: float = 0
 
 @onready var time_box_hours: TimeBox = %TimeBoxHours
 @onready var time_box_mins: TimeBox = %TimeBoxMins
@@ -14,18 +14,18 @@ var seconds: int = 0
 @onready var pomodoro: Pomodoro = $"../../../.."
 
 
-func convert_minutes_to_seconds(minutes_to_convert: int) -> int:
+func convert_minutes_to_seconds(minutes_to_convert: float) -> float:
 	return minutes_to_convert * 60
 
 
-func convert_hours_to_seconds(hours_to_convert: int) -> int:
+func convert_hours_to_seconds(hours_to_convert: float) -> float:
 	return hours_to_convert * 3600
 
 
 func _on_start_button_pressed() -> void:
-	hours = int(time_box_hours.text)
-	minutes = int(time_box_mins.text)
-	seconds = int(time_box_secs.text)
+	hours = float(time_box_hours.text)
+	minutes = float(time_box_mins.text)
+	seconds = float(time_box_secs.text)
 
 	if not hours and not minutes and not seconds:
 		time_error.text = NO_INPUT_TEXT
@@ -37,9 +37,10 @@ func _on_start_button_pressed() -> void:
 		return
 
 	time_error.text = ""
-	var total_time_seconds: int = (
+	var total_time_seconds: float = (
 		convert_hours_to_seconds(hours)
 		+ convert_minutes_to_seconds(minutes)
 		+ seconds
 	)
-	pomodoro.submit_time.emit(total_time_seconds)
+	EventBus.submit_time.emit(total_time_seconds)
+	pomodoro.change_state.emit(pomodoro.States.WORK)
