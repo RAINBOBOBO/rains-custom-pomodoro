@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cpx3bks84mu5k"]
 
-[ext_resource type="Script" path="res://time_box.gd" id="1_wk1ra"]
+[ext_resource type="Script" path="res://inputs/time_box.gd" id="1_wk1ra"]
 
 [node name="TimeBox" type="LineEdit"]
 anchors_preset = 15

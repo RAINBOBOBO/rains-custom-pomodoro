@@ -1,13 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://fxc08qi55w13"]
+[gd_scene load_steps=11 format=3 uid="uid://fxc08qi55w13"]
 
-[ext_resource type="Script" path="res://pomodoro.gd" id="1_ahdmq"]
-[ext_resource type="PackedScene" uid="uid://cpx3bks84mu5k" path="res://time_box.tscn" id="1_qlhwj"]
-[ext_resource type="Script" path="res://inputs.gd" id="2_g2p2r"]
-[ext_resource type="Script" path="res://time_clear_button.gd" id="3_reljk"]
-[ext_resource type="Script" path="res://timer_display.gd" id="5_2vo4i"]
-[ext_resource type="Texture2D" uid="uid://cmiaw0e0a1rr0" path="res://progress.png" id="6_trpdq"]
-[ext_resource type="Script" path="res://pomodoro_timer.gd" id="7_706jc"]
-[ext_resource type="Script" path="res://finished.gd" id="8_dbdf6"]
+[ext_resource type="Script" path="res://pomodoro/pomodoro.gd" id="1_ahdmq"]
+[ext_resource type="PackedScene" uid="uid://cpx3bks84mu5k" path="res://inputs/time_box.tscn" id="1_qlhwj"]
+[ext_resource type="Script" path="res://inputs/inputs.gd" id="2_g2p2r"]
+[ext_resource type="Script" path="res://inputs/time_clear_button.gd" id="3_reljk"]
+[ext_resource type="Script" path="res://timer_display/timer_display.gd" id="5_2vo4i"]
+[ext_resource type="Texture2D" uid="uid://cmiaw0e0a1rr0" path="res://timer_display/progress.png" id="6_trpdq"]
+[ext_resource type="Script" path="res://pomodoro/pomodoro_timer.gd" id="7_706jc"]
+[ext_resource type="Script" path="res://finished/exercise.gd" id="8_3mpqx"]
+[ext_resource type="Script" path="res://finished/finished.gd" id="8_dbdf6"]
+[ext_resource type="Resource" uid="uid://bjifcn0ys4xs3" path="res://resource_groups/all_exercises.tres" id="9_oo4fd"]
 
 [node name="Pomodoro" type="Node2D"]
 script = ExtResource("1_ahdmq")
@@ -181,8 +183,10 @@ theme_override_constants/margin_top = 100
 
 [node name="Exercise" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished/MarginContainer2"]
 layout_mode = 2
-text = "Now do 10 push ups."
+text = "EMPTY"
 horizontal_alignment = 1
+script = ExtResource("8_3mpqx")
+phrases = ExtResource("9_oo4fd")
 
 [node name="Spacer" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/Finished"]
 layout_mode = 2
@@ -208,5 +212,6 @@ script = ExtResource("7_706jc")
 [connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls/PauseButton" to="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls/ResetButton" to="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay" method="_on_reset_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay/TimerControls/StopButton" to="CanvasLayer/PanelContainer/VBoxContainer/TimerDisplay" method="_on_stop_button_pressed"]
+[connection signal="visibility_changed" from="CanvasLayer/PanelContainer/VBoxContainer/Finished/MarginContainer2/Exercise" to="CanvasLayer/PanelContainer/VBoxContainer/Finished/MarginContainer2/Exercise" method="_on_visibility_changed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/VBoxContainer/Finished/MarginContainer3/DoneButton" to="CanvasLayer/PanelContainer/VBoxContainer/Finished" method="_on_done_button_pressed"]
 [connection signal="timeout" from="PomodoroTimer" to="PomodoroTimer" method="_on_timeout"]

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Exercise_Phrase" load_steps=2 format=3 uid="uid://b0pm5u3w64e6u"]
+
+[ext_resource type="Script" path="res://finished/exercise_phrase.gd" id="1_45bin"]
+
+[resource]
+script = ExtResource("1_45bin")
+phrase = "Now go do 3 L sits"

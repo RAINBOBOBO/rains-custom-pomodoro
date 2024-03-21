@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Exercise_Phrase" load_steps=2 format=3 uid="uid://cfif6lml0udu3"]
+
+[ext_resource type="Script" path="res://finished/exercise_phrase.gd" id="1_yw3mh"]
+
+[resource]
+script = ExtResource("1_yw3mh")
+phrase = "Gimme 5 ATG split squats (each leg)"

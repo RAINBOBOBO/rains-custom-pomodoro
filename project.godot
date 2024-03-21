@@ -11,10 +11,13 @@ config_version=5
 [application]
 
 config/name="Custom Pomodoro"
-run/main_scene="res://pomodoro.tscn"
+run/main_scene="res://pomodoro/pomodoro.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
 
 [autoload]
 
-EventBus="*res://event_bus.gd"
+EventBus="*res://autoload/event_bus.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_resource_groups/plugin.cfg")
