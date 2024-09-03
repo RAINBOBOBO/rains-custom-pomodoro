@@ -1,6 +1,7 @@
 class_name Finished extends VBoxContainer
 
-@onready var pomodoro: Pomodoro = $"../../../.."
+signal done_button_pressed
+
 
 func _on_done_button_pressed() -> void:
-	pomodoro.change_state.emit(Pomodoro.States.TIME_INPUT)
+	done_button_pressed.emit()

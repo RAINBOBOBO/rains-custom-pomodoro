@@ -1,5 +1,7 @@
 class_name PomodoroTimer extends Timer
 
+signal timer_complete
+
 var total_seconds: float = 0
 var elapsed_seconds: float = 0
 var percent_complete: float = 0
@@ -31,7 +33,7 @@ func _on_timeout() -> void:
 	seconds_remaining = total_seconds - elapsed_seconds
 	if percent_complete == 100:
 		stop()
-		pomodoro.change_state.emit(Pomodoro.States.TIMER_COMPLETE)
+		timer_complete.emit()
 
 
 func _on_submit_time(time_seconds: float) -> void:

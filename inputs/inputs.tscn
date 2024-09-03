@@ -1,0 +1,84 @@
+[gd_scene load_steps=5 format=3 uid="uid://bb1xkoigqu4uk"]
+
+[ext_resource type="Script" path="res://inputs/inputs.gd" id="1_w5p0o"]
+[ext_resource type="Script" path="res://state_machine/input_state.gd" id="2_qv618"]
+[ext_resource type="PackedScene" uid="uid://cpx3bks84mu5k" path="res://inputs/time_box.tscn" id="2_qx6lt"]
+[ext_resource type="Script" path="res://inputs/time_clear_button.gd" id="3_n0b1q"]
+
+[node name="Inputs" type="VBoxContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_w5p0o")
+
+[node name="States" type="Node" parent="."]
+
+[node name="DefaultInput" type="Node" parent="States"]
+script = ExtResource("2_qv618")
+
+[node name="Confirm" type="Node" parent="States"]
+script = ExtResource("2_qv618")
+
+[node name="InputsSubtitle" type="Label" parent="."]
+layout_mode = 2
+text = "How long would you like to work?"
+horizontal_alignment = 1
+
+[node name="TimeInputContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_top = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TimeInputContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="TimeBoxHours" parent="TimeInputContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimeBoxMins" parent="TimeInputContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimeBoxSecs" parent="TimeInputContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TimeClearButton" type="Button" parent="TimeInputContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Clear"
+script = ExtResource("3_n0b1q")
+
+[node name="FormatHint" type="Label" parent="."]
+layout_mode = 2
+text = "( HH : MM : SS )"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 20
+
+[node name="TimeError" type="Label" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="StartMarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/margin_bottom = 100
+
+[node name="StartButton" type="Button" parent="StartMarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "START"
+
+[connection signal="pressed" from="TimeInputContainer/HBoxContainer/TimeClearButton" to="TimeInputContainer/HBoxContainer/TimeClearButton" method="_on_pressed"]
+[connection signal="pressed" from="StartMarginContainer/StartButton" to="." method="_on_start_button_pressed"]

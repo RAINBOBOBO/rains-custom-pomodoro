@@ -1,17 +1,28 @@
 extends VBoxContainer
 
+signal timer_start_button_pressed
+
 const CONFIRM_TEXT = "Are you sure that's how long you want to work?"
 const NO_INPUT_TEXT = "You haven't entered a time."
 
 var hours: float = 0
 var minutes: float = 0
 var seconds: float = 0
+var input_state_machine: StateMachine
 
 @onready var time_box_hours: TimeBox = %TimeBoxHours
 @onready var time_box_mins: TimeBox = %TimeBoxMins
 @onready var time_box_secs: TimeBox = %TimeBoxSecs
 @onready var time_error: Label = %TimeError
-@onready var pomodoro: Pomodoro = $"../../../.."
+
+# states
+@onready var states: Node = $States
+@onready var default_input: InputState = $States/DefaultInput
+@onready var confirm: InputState = $States/Confirm
+
+
+func _ready() -> void:
+	input_state_machine = StateMachine.new()
 
 
 func convert_minutes_to_seconds(minutes_to_convert: float) -> float:
@@ -31,9 +42,9 @@ func _on_start_button_pressed() -> void:
 		time_error.text = NO_INPUT_TEXT
 		return
 
-	if hours > 1 and pomodoro.state != pomodoro.States.CONFIRM:
+	if hours > 1 and input_state_machine.state != confirm:
 		time_error.text = CONFIRM_TEXT
-		pomodoro.change_state.emit(pomodoro.States.CONFIRM)
+		input_state_machine.set_state(confirm)
 		return
 
 	time_error.text = ""
@@ -43,4 +54,5 @@ func _on_start_button_pressed() -> void:
 		+ seconds
 	)
 	EventBus.submit_time.emit(total_time_seconds)
-	pomodoro.change_state.emit(pomodoro.States.WORK)
+	input_state_machine.set_state(default_input)
+	timer_start_button_pressed.emit()

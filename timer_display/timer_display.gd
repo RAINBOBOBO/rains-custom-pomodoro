@@ -1,16 +1,17 @@
 class_name TimerDisplay extends VBoxContainer
 
+signal timer_stop_button_pressed
+
+var pomodoro_timer: PomodoroTimer
+
 @onready var pause_button: Button = %PauseButton
 @onready var reset_button: Button = %ResetButton
 @onready var stop_button: Button = %StopButton
 @onready var texture_progress_bar: TextureProgressBar = %TextureProgressBar
 @onready var time_remaining: Label = %TimeRemaining
-@onready var pomodoro_timer: PomodoroTimer = %PomodoroTimer
-@onready var pomodoro: Pomodoro = $"../../../.."
 
 
 func _ready() -> void:
-	pomodoro_timer.timeout.connect(_on_pomodoro_timeout)
 	EventBus.submit_time.connect(_on_submit_time)
 
 
@@ -20,6 +21,11 @@ func convert_seconds_to_time(total_seconds: float) -> String:
 	var minutes = (int_seconds / 60) % 60
 	var hours = (int_seconds / 60) / 60
 	return "%02d:%02d:%02d" % [hours, minutes, seconds]
+
+
+func inject_timer(p_pomodoro_timer: PomodoroTimer) -> void:
+	pomodoro_timer = p_pomodoro_timer
+	pomodoro_timer.timeout.connect(_on_pomodoro_timeout)
 
 
 func _on_submit_time(time_seconds: float) -> void:
@@ -59,4 +65,4 @@ func _on_reset_button_pressed() -> void:
 
 func _on_stop_button_pressed() -> void:
 	pomodoro_timer.reset_timer()
-	pomodoro.change_state.emit(Pomodoro.States.TIME_INPUT)
+	timer_stop_button_pressed.emit()

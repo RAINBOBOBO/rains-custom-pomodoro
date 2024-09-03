@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8deolyl7hjfm"]
+
+[ext_resource type="Script" path="res://timer_display/timer_display.gd" id="1_7m1a1"]
+[ext_resource type="Texture2D" uid="uid://cmiaw0e0a1rr0" path="res://timer_display/progress.png" id="2_y6gwa"]
+
+[node name="TimerDisplay" type="VBoxContainer"]
+visible = false
+script = ExtResource("1_7m1a1")
+
+[node name="TimerSubtitle" type="Label" parent="."]
+layout_mode = 2
+text = "Keep up the good work"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+fill_mode = 4
+texture_under = ExtResource("2_y6gwa")
+texture_progress = ExtResource("2_y6gwa")
+tint_under = Color(0.423529, 0.423529, 0.423529, 1)
+tint_progress = Color(0.0862745, 0.729412, 0.196078, 1)
+
+[node name="TimeRemaining" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Time remaining: 00:00:00"
+horizontal_alignment = 1
+
+[node name="TimerControls" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PauseButton" type="Button" parent="TimerControls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pause"
+
+[node name="ResetButton" type="Button" parent="TimerControls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reset"
+
+[node name="StopButton" type="Button" parent="TimerControls"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Stop
+"
+
+[connection signal="pressed" from="TimerControls/PauseButton" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="TimerControls/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="TimerControls/StopButton" to="." method="_on_stop_button_pressed"]
