@@ -5,7 +5,11 @@
 [ext_resource type="Resource" uid="uid://bjifcn0ys4xs3" path="res://resource_groups/all_exercises.tres" id="3_ut01r"]
 
 [node name="Finished" type="VBoxContainer"]
-visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 script = ExtResource("1_ln8sy")
 
@@ -15,8 +19,8 @@ theme_override_constants/margin_left = 200
 theme_override_constants/margin_right = 200
 
 [node name="Encouragement" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
-size_flags_vertical = 6
 text = "Great job! You are such a good worker. This outfit is very flattering. You have a lot of gravitas. Your jawline is extrordinary. You're a nice height. Your energy is electric."
 horizontal_alignment = 1
 vertical_alignment = 1

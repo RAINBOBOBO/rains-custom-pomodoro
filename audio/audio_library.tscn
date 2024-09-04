@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=3 uid="uid://coblg17d868dd"]
+
+[ext_resource type="Script" path="res://audio/audio_library.gd" id="1_we8dv"]
+[ext_resource type="AudioStream" uid="uid://bp3bxsxtd6u8f" path="res://audio/audio_files/morning_alarm.mp3" id="2_h6orc"]
+[ext_resource type="AudioStream" uid="uid://blaihwcpmenyt" path="res://audio/audio_files/retro_dream.mp3" id="3_gdq7f"]
+[ext_resource type="AudioStream" uid="uid://7k7w8sna2mro" path="res://audio/audio_files/rocktronica.mp3" id="4_v8l0o"]
+[ext_resource type="AudioStream" uid="uid://p72ecdp8j7mq" path="res://audio/audio_files/soft_alarm.mp3" id="5_pmhhi"]
+
+[node name="AudioLibrary" type="Node"]
+script = ExtResource("1_we8dv")
+
+[node name="MorningAlarm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_h6orc")
+
+[node name="RetroDream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_gdq7f")
+
+[node name="Rocktronica" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_v8l0o")
+
+[node name="SoftAlarm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_pmhhi")

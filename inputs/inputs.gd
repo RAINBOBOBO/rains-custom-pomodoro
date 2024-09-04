@@ -1,5 +1,6 @@
 extends VBoxContainer
 
+signal settings_button_pressed
 signal timer_start_button_pressed
 
 const CONFIRM_TEXT = "Are you sure that's how long you want to work?"
@@ -8,7 +9,7 @@ const NO_INPUT_TEXT = "You haven't entered a time."
 var hours: float = 0
 var minutes: float = 0
 var seconds: float = 0
-var input_state_machine: StateMachine
+var state_machine: StateMachine
 
 @onready var time_box_hours: TimeBox = %TimeBoxHours
 @onready var time_box_mins: TimeBox = %TimeBoxMins
@@ -22,7 +23,8 @@ var input_state_machine: StateMachine
 
 
 func _ready() -> void:
-	input_state_machine = StateMachine.new()
+	state_machine = StateMachine.new()
+	state_machine.set_state(default_input)
 
 
 func convert_minutes_to_seconds(minutes_to_convert: float) -> float:
@@ -31,6 +33,10 @@ func convert_minutes_to_seconds(minutes_to_convert: float) -> float:
 
 func convert_hours_to_seconds(hours_to_convert: float) -> float:
 	return hours_to_convert * 3600
+
+
+func _on_settings_button_pressed() -> void:
+	settings_button_pressed.emit()
 
 
 func _on_start_button_pressed() -> void:
@@ -42,9 +48,9 @@ func _on_start_button_pressed() -> void:
 		time_error.text = NO_INPUT_TEXT
 		return
 
-	if hours > 1 and input_state_machine.state != confirm:
+	if hours > 1 and state_machine.state != confirm:
 		time_error.text = CONFIRM_TEXT
-		input_state_machine.set_state(confirm)
+		state_machine.set_state(confirm)
 		return
 
 	time_error.text = ""
@@ -54,5 +60,5 @@ func _on_start_button_pressed() -> void:
 		+ seconds
 	)
 	EventBus.submit_time.emit(total_time_seconds)
-	input_state_machine.set_state(default_input)
+	state_machine.set_state(default_input)
 	timer_start_button_pressed.emit()

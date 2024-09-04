@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://borcfcj3tnhqd"]
+
+[ext_resource type="Script" path="res://settings/settings.gd" id="1_t70is"]
+[ext_resource type="Script" path="res://settings/menu.gd" id="2_hllm5"]
+[ext_resource type="Script" path="res://settings/audio.gd" id="3_bp87a"]
+[ext_resource type="Script" path="res://settings/menu_container.gd" id="4_qgq63"]
+
+[node name="Settings" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t70is")
+
+[node name="States" type="Node" parent="."]
+
+[node name="Menu" type="Node" parent="States"]
+script = ExtResource("2_hllm5")
+
+[node name="Audio" type="Node" parent="States"]
+script = ExtResource("3_bp87a")
+
+[node name="TitleModifier" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="TitleModifierLabel" type="Label" parent="TitleModifier"]
+layout_mode = 2
+
+[node name="Title" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_bottom = 50
+
+[node name="TitleLabel" type="Label" parent="Title"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+script = ExtResource("4_qgq63")
+
+[node name="Audio" type="MarginContainer" parent="MenuContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="AudioButton" type="Button" parent="MenuContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Audio"
+
+[node name="Back" type="MarginContainer" parent="MenuContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MenuContainer/Back"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Back"
+
+[node name="AudioContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="MenuContainer/Audio/AudioButton" to="MenuContainer" method="_on_audio_button_pressed"]
+[connection signal="pressed" from="MenuContainer/Back/BackButton" to="MenuContainer" method="_on_back_button_pressed"]

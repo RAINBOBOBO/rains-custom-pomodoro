@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://fxc08qi55w13"]
+[gd_scene load_steps=12 format=3 uid="uid://fxc08qi55w13"]
 
 [ext_resource type="Script" path="res://pomodoro/pomodoro.gd" id="1_ahdmq"]
 [ext_resource type="Script" path="res://pomodoro/states/time_input.gd" id="2_5kli5"]
@@ -7,7 +7,10 @@
 [ext_resource type="Script" path="res://pomodoro/states/work.gd" id="4_grw5n"]
 [ext_resource type="PackedScene" uid="uid://bww3xuq5mrqhp" path="res://finished/finished.tscn" id="4_qmnea"]
 [ext_resource type="Script" path="res://pomodoro/states/timer_complete.gd" id="5_5rreq"]
+[ext_resource type="Script" path="res://pomodoro/states/settings.gd" id="5_sxa6d"]
+[ext_resource type="PackedScene" uid="uid://borcfcj3tnhqd" path="res://settings/settings.tscn" id="7_0cy3k"]
 [ext_resource type="Script" path="res://pomodoro/pomodoro_timer.gd" id="7_706jc"]
+[ext_resource type="PackedScene" uid="uid://coblg17d868dd" path="res://audio/audio_library.tscn" id="9_kjlpb"]
 
 [node name="Pomodoro" type="Node2D"]
 script = ExtResource("1_ahdmq")
@@ -22,6 +25,9 @@ script = ExtResource("4_grw5n")
 
 [node name="TimerComplete" type="Node" parent="States"]
 script = ExtResource("5_5rreq")
+
+[node name="Settings" type="Node" parent="States"]
+script = ExtResource("5_sxa6d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -49,16 +55,26 @@ text = "POMODORO"
 unique_name_in_owner = true
 layout_mode = 2
 
+[node name="SettingsContainer" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("7_0cy3k")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
 [node name="TimerDisplay" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("3_0ex4r")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="Finished" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("4_qmnea")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="PomodoroTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 script = ExtResource("7_706jc")
+
+[node name="AudioLibrary" parent="." instance=ExtResource("9_kjlpb")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="PomodoroTimer" to="PomodoroTimer" method="_on_timeout"]
