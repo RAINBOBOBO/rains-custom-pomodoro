@@ -1,17 +1,18 @@
-extends VBoxContainer
+class_name SettingsContainer extends VBoxContainer
 
 signal settings_complete
+signal sound_names_requested
 
 var state_machine: StateMachine
 
 # containers
-@onready var menu_container: VBoxContainer = $MenuContainer
-@onready var audio_container: VBoxContainer = $AudioContainer
+@onready var menu_container: SettingsMenuContainer = $MenuContainer
+@onready var audio_container: AudioContainer = $AudioContainer
 
 # states
 @onready var states: Node = $States
-@onready var audio: SettingsState = $States/Audio
-@onready var menu: SettingsState = $States/Menu
+@onready var menu: MenuSettingsState = $States/Menu
+@onready var audio: AudioSettingsState = $States/Audio
 
 
 func _ready() -> void:
@@ -29,6 +30,10 @@ func exit_settings() -> void:
 func hide_all() -> void:
 	menu_container.visible = false
 	audio_container.visible = false
+
+
+func set_sound_names(sound_names: Array[String]) -> void:
+	audio_container.set_sound_names(sound_names)
 
 
 func set_state(next_state: SettingsState) -> void:

@@ -1,4 +1,4 @@
-extends SettingsState
+class_name MenuSettingsState extends SettingsState
 
 
 func enter() -> void:

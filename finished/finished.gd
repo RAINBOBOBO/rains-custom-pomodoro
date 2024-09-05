@@ -1,4 +1,4 @@
-class_name Finished extends VBoxContainer
+class_name FinishedContainer extends VBoxContainer
 
 signal done_button_pressed
 

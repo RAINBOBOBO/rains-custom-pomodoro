@@ -17,6 +17,8 @@ config/features=PackedStringArray("4.2", "Forward Plus")
 [autoload]
 
 EventBus="*res://autoload/event_bus.gd"
+ConfigFileHandler="*res://autoload/config_file_handler.gd"
+Paths="*res://autoload/paths.gd"
 
 [editor_plugins]
 

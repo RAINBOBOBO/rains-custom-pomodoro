@@ -1,4 +1,4 @@
-extends VBoxContainer
+class_name InputsContainer extends VBoxContainer
 
 signal settings_button_pressed
 signal timer_start_button_pressed

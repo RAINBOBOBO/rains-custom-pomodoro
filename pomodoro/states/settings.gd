@@ -1,4 +1,4 @@
-extends PomodoroState
+class_name PomodoroSettingsState extends PomodoroState
 
 var settings_section: VBoxContainer
 
@@ -13,6 +13,7 @@ func inject_dependencies(
 ) -> void:
 	settings_complete_signal.connect(_on_settings_complete)
 	settings_section = p_settings_section
+	settings_section.sound_names_requested.emit()
 
 
 func _on_settings_complete() -> void:

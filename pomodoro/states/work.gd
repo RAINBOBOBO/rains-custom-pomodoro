@@ -1,4 +1,4 @@
-extends PomodoroState
+class_name PomodoroWorkState extends PomodoroState
 
 var stop_timer_signal: Signal
 var timer_display_section: VBoxContainer

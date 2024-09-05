@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://borcfcj3tnhqd"]
+[gd_scene load_steps=6 format=3 uid="uid://borcfcj3tnhqd"]
 
 [ext_resource type="Script" path="res://settings/settings.gd" id="1_t70is"]
 [ext_resource type="Script" path="res://settings/menu.gd" id="2_hllm5"]
 [ext_resource type="Script" path="res://settings/audio.gd" id="3_bp87a"]
 [ext_resource type="Script" path="res://settings/menu_container.gd" id="4_qgq63"]
+[ext_resource type="Script" path="res://settings/audio_container.gd" id="5_7ujaw"]
 
 [node name="Settings" type="VBoxContainer"]
 anchors_preset = 15
@@ -39,6 +40,7 @@ text = "Settings"
 horizontal_alignment = 1
 
 [node name="MenuContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 script = ExtResource("4_qgq63")
 
@@ -61,9 +63,51 @@ size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 20
 text = "Back"
 
-[node name="AudioContainer" type="VBoxContainer" parent="."]
+[node name="AudioContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("alarm_sound_menu", "sample_button", "stop_button")]
+layout_mode = 2
+script = ExtResource("5_7ujaw")
+alarm_sound_menu = NodePath("AlarmSoundPicker/HBoxContainer/MenuBar/Alarm Sound")
+sample_button = NodePath("AlarmSoundPicker/HBoxContainer/SampleButton")
+stop_button = NodePath("AlarmSoundPicker/HBoxContainer/StopButton")
+
+[node name="AlarmSoundPicker" type="MarginContainer" parent="AudioContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AudioContainer/AlarmSoundPicker"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="AudioContainer/AlarmSoundPicker/HBoxContainer"]
+layout_mode = 2
+text = "Alarm Sound: "
+
+[node name="MenuBar" type="MenuBar" parent="AudioContainer/AlarmSoundPicker/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Alarm Sound" type="PopupMenu" parent="AudioContainer/AlarmSoundPicker/HBoxContainer/MenuBar"]
+title = "Alarm Sounds"
+
+[node name="SampleButton" type="Button" parent="AudioContainer/AlarmSoundPicker/HBoxContainer"]
+layout_mode = 2
+text = "Sample"
+
+[node name="StopButton" type="Button" parent="AudioContainer/AlarmSoundPicker/HBoxContainer"]
 visible = false
 layout_mode = 2
+text = "Stop"
+
+[node name="Back" type="MarginContainer" parent="AudioContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BackButton" type="Button" parent="AudioContainer/Back"]
+layout_mode = 2
+text = "Back"
 
 [connection signal="pressed" from="MenuContainer/Audio/AudioButton" to="MenuContainer" method="_on_audio_button_pressed"]
 [connection signal="pressed" from="MenuContainer/Back/BackButton" to="MenuContainer" method="_on_back_button_pressed"]
+[connection signal="pressed" from="AudioContainer/AlarmSoundPicker/HBoxContainer/SampleButton" to="AudioContainer" method="_on_sample_button_pressed"]
+[connection signal="pressed" from="AudioContainer/AlarmSoundPicker/HBoxContainer/StopButton" to="AudioContainer" method="_on_stop_button_pressed"]
+[connection signal="pressed" from="AudioContainer/Back/BackButton" to="AudioContainer" method="_on_back_button_pressed"]

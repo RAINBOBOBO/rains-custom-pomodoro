@@ -1,4 +1,4 @@
-extends PomodoroState
+class_name TimeInputState extends PomodoroState
 
 var settings_signal: Signal
 var start_timer_signal: Signal

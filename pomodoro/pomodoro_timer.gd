@@ -12,7 +12,6 @@ var seconds_remaining: float = 0
 
 func _ready() -> void:
 	EventBus.submit_time.connect(_on_submit_time)
-	EventBus.reset_pomodoro.connect(_on_reset)
 
 
 func reset_timer() -> void:
@@ -21,10 +20,6 @@ func reset_timer() -> void:
 	percent_complete = 0
 	seconds_remaining = 0
 	paused = false
-
-
-func _on_reset() -> void:
-	reset_timer()
 
 
 func _on_timeout() -> void:

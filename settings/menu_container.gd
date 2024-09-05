@@ -1,4 +1,4 @@
-extends VBoxContainer
+class_name SettingsMenuContainer extends VBoxContainer
 
 signal audio_pressed
 signal back_pressed

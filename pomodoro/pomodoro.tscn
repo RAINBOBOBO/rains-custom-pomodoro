@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://pomodoro/states/settings.gd" id="5_sxa6d"]
 [ext_resource type="PackedScene" uid="uid://borcfcj3tnhqd" path="res://settings/settings.tscn" id="7_0cy3k"]
 [ext_resource type="Script" path="res://pomodoro/pomodoro_timer.gd" id="7_706jc"]
-[ext_resource type="PackedScene" uid="uid://coblg17d868dd" path="res://audio/audio_library.tscn" id="9_kjlpb"]
+[ext_resource type="PackedScene" uid="uid://coblg17d868dd" path="res://audio/audio_library.tscn" id="11_5aqv3"]
 
 [node name="Pomodoro" type="Node2D"]
 script = ExtResource("1_ahdmq")
@@ -74,7 +74,7 @@ layout_mode = 2
 unique_name_in_owner = true
 script = ExtResource("7_706jc")
 
-[node name="AudioLibrary" parent="." instance=ExtResource("9_kjlpb")]
+[node name="AudioLibrary" parent="." instance=ExtResource("11_5aqv3")]
 unique_name_in_owner = true
 
 [connection signal="timeout" from="PomodoroTimer" to="PomodoroTimer" method="_on_timeout"]

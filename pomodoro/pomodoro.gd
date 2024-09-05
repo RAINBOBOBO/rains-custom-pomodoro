@@ -2,19 +2,19 @@ class_name Pomodoro extends Node2D
 
 var state_machine:= StateMachine.new()
 
-@onready var timer_display: VBoxContainer = %TimerDisplay
-@onready var finished: VBoxContainer = %Finished
-@onready var inputs: VBoxContainer = %Inputs
+@onready var timer_display: TimerDisplay = %TimerDisplay
+@onready var finished: FinishedContainer = %Finished
+@onready var inputs: InputsContainer = %Inputs
 @onready var pomodoro_timer: PomodoroTimer = %PomodoroTimer
 @onready var audio_library: AudioLibrary = %AudioLibrary
-@onready var settings_container: VBoxContainer = %SettingsContainer
+@onready var settings_container: SettingsContainer = %SettingsContainer
 
 # states
 @onready var states: Node = $States
-@onready var time_input: PomodoroState = $States/TimeInput
-@onready var work: PomodoroState = $States/Work
-@onready var timer_complete: PomodoroState = $States/TimerComplete
-@onready var settings: PomodoroState = $States/Settings
+@onready var time_input: TimeInputState = $States/TimeInput
+@onready var work: PomodoroWorkState = $States/Work
+@onready var timer_complete: TimerCompleteState = $States/TimerComplete
+@onready var settings: PomodoroSettingsState = $States/Settings
 
 
 func _ready() -> void:
@@ -23,6 +23,7 @@ func _ready() -> void:
 	for pomodoro_state in states.get_children():
 		pomodoro_state.state_manager = self
 
+	_connect_signals()
 	_inject_dependencies()
 	timer_display.inject_timer(pomodoro_timer)
 
@@ -58,11 +59,16 @@ func hide_all() -> void:
 	inputs.visible = false
 	timer_display.visible = false
 	finished.visible = false
+	settings_container.visible = false
 
 
 func set_next_state_for(current_state: PomodoroState) -> void:
 	var next_state: PomodoroState = current_state.next_state
 	state_machine.set_state(next_state)
+
+
+func _connect_signals() -> void:
+	settings_container.sound_names_requested.connect(_on_sound_names_requested)
 
 
 func _inject_dependencies() -> void:
@@ -78,12 +84,16 @@ func _inject_dependencies() -> void:
 	timer_complete.inject_dependencies(
 		finished.done_button_pressed,
 		finished,
-		audio_library,
 	)
 	settings.inject_dependencies(
 		settings_container.settings_complete,
 		settings_container,
 	)
+
+
+func _on_sound_names_requested() -> void:
+	var sound_names: Array[String] = audio_library.get_all_sound_names()
+	settings_container.set_sound_names(sound_names)
 
 
 func _on_timer_complete() -> void:
