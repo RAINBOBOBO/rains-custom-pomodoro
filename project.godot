@@ -13,6 +13,9 @@ config_version=5
 config/name="Custom Pomodoro"
 run/main_scene="res://pomodoro/pomodoro.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/image="res://icon/pomodoro_splash.png"
+config/icon="res://icon/pomodoro_icon.png"
+config/windows_native_icon="res://icon/pomodoro_icon_biggest.ico"
 
 [autoload]
 
