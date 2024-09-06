@@ -25,6 +25,7 @@ script = ExtResource("2_hllm5")
 script = ExtResource("3_bp87a")
 
 [node name="MenuContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 script = ExtResource("4_qgq63")
 
@@ -57,7 +58,6 @@ text = "Audio"
 script = ExtResource("5_1xa0j")
 
 [node name="AudioContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("alarm_sound_menu", "sample_button", "stop_button")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 script = ExtResource("5_7ujaw")

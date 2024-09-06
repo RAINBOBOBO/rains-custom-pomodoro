@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bww3xuq5mrqhp"]
+[gd_scene load_steps=6 format=3 uid="uid://bww3xuq5mrqhp"]
 
 [ext_resource type="Script" path="res://finished/finished.gd" id="1_ln8sy"]
+[ext_resource type="Theme" uid="uid://dlfs0lfwdl12i" path="res://ui/theme/pomodoro_theme.tres" id="1_wkys6"]
 [ext_resource type="Script" path="res://finished/exercise.gd" id="2_0yplm"]
 [ext_resource type="Resource" uid="uid://bjifcn0ys4xs3" path="res://resource_groups/all_exercises.tres" id="3_ut01r"]
 [ext_resource type="Script" path="res://ui/button_hover_component.gd" id="4_0ecvj"]
@@ -12,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+theme = ExtResource("1_wkys6")
 script = ExtResource("1_ln8sy")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

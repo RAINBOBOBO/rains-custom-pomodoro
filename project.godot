@@ -14,8 +14,7 @@ config/name="Custom Pomodoro"
 run/main_scene="res://pomodoro/pomodoro.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.345098, 0.505882, 0.341176, 1)
-boot_splash/image="res://icon/pomodoro_splash.png"
-config/icon="res://icon/pomodoro_icon.png"
+config/icon="res://icon/pomodoro_icon_biggest.png"
 config/windows_native_icon="res://icon/pomodoro_icon_biggest.ico"
 
 [autoload]

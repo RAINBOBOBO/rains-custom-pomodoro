@@ -48,6 +48,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme = ExtResource("6_i0xdb")
 
 [node name="TitleMarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
 layout_mode = 2
