@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb1xkoigqu4uk"]
+[gd_scene load_steps=7 format=3 uid="uid://bb1xkoigqu4uk"]
 
 [ext_resource type="Script" path="res://inputs/inputs.gd" id="1_w5p0o"]
 [ext_resource type="Script" path="res://state_machine/input_state.gd" id="2_qv618"]
 [ext_resource type="PackedScene" uid="uid://cpx3bks84mu5k" path="res://inputs/time_box.tscn" id="2_qx6lt"]
 [ext_resource type="Script" path="res://inputs/time_clear_button.gd" id="3_n0b1q"]
+[ext_resource type="Theme" uid="uid://dlfs0lfwdl12i" path="res://ui/theme/pomodoro_theme.tres" id="4_7q5nq"]
+[ext_resource type="Script" path="res://ui/button_hover_component.gd" id="6_n2yho"]
 
 [node name="Inputs" type="VBoxContainer"]
 anchors_preset = 8
@@ -31,6 +33,7 @@ script = ExtResource("2_qv618")
 
 [node name="InputsSubtitle" type="Label" parent="."]
 layout_mode = 2
+theme = ExtResource("4_7q5nq")
 text = "How long would you like to work?"
 horizontal_alignment = 1
 
@@ -40,32 +43,42 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/margin_top = 100
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TimeInputContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TimeInputContainer"]
+layout_mode = 2
+theme = ExtResource("4_7q5nq")
+
+[node name="FormatHint" type="Label" parent="TimeInputContainer/VBoxContainer"]
+layout_mode = 2
+text = "( HH  :   MM   :  SS )"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TimeInputContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("4_7q5nq")
 
-[node name="TimeBoxHours" parent="TimeInputContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
+[node name="TimeBoxHours" parent="TimeInputContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TimeBoxMins" parent="TimeInputContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
+[node name="TimeBoxMins" parent="TimeInputContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TimeBoxSecs" parent="TimeInputContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
+[node name="TimeBoxSecs" parent="TimeInputContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TimeClearButton" type="Button" parent="TimeInputContainer/HBoxContainer"]
+[node name="TimeClearButton" type="Button" parent="TimeInputContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+focus_mode = 0
+theme = ExtResource("4_7q5nq")
 text = "Clear"
 script = ExtResource("3_n0b1q")
 
-[node name="FormatHint" type="Label" parent="."]
-layout_mode = 2
-text = "( HH : MM : SS )"
-horizontal_alignment = 1
+[node name="ButtonHoverComponent" type="Node" parent="TimeInputContainer/VBoxContainer/TimeClearButton"]
+script = ExtResource("6_n2yho")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -83,10 +96,14 @@ theme_override_constants/margin_bottom = 30
 
 [node name="StartButton" type="Button" parent="StartMarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 40
+focus_mode = 0
+theme = ExtResource("4_7q5nq")
+theme_override_font_sizes/font_size = 30
 text = "START"
+
+[node name="ButtonHoverComponent" type="Node" parent="StartMarginContainer/StartButton"]
+script = ExtResource("6_n2yho")
 
 [node name="SettingsMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -94,10 +111,14 @@ theme_override_constants/margin_bottom = 15
 
 [node name="SettingsButton" type="Button" parent="SettingsMarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 20
+focus_mode = 0
+theme = ExtResource("4_7q5nq")
+theme_override_font_sizes/font_size = 30
 text = "Settings"
 
-[connection signal="pressed" from="TimeInputContainer/HBoxContainer/TimeClearButton" to="TimeInputContainer/HBoxContainer/TimeClearButton" method="_on_pressed"]
+[node name="ButtonHoverComponent" type="Node" parent="SettingsMarginContainer/SettingsButton"]
+script = ExtResource("6_n2yho")
+
+[connection signal="pressed" from="TimeInputContainer/VBoxContainer/TimeClearButton" to="TimeInputContainer/VBoxContainer/TimeClearButton" method="_on_pressed"]
 [connection signal="pressed" from="StartMarginContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="SettingsMarginContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

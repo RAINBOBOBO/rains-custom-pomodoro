@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fxc08qi55w13"]
+[gd_scene load_steps=13 format=3 uid="uid://fxc08qi55w13"]
 
 [ext_resource type="Script" path="res://pomodoro/pomodoro.gd" id="1_ahdmq"]
 [ext_resource type="Script" path="res://pomodoro/states/time_input.gd" id="2_5kli5"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bww3xuq5mrqhp" path="res://finished/finished.tscn" id="4_qmnea"]
 [ext_resource type="Script" path="res://pomodoro/states/timer_complete.gd" id="5_5rreq"]
 [ext_resource type="Script" path="res://pomodoro/states/settings.gd" id="5_sxa6d"]
+[ext_resource type="Theme" uid="uid://dlfs0lfwdl12i" path="res://ui/theme/pomodoro_theme.tres" id="6_i0xdb"]
 [ext_resource type="PackedScene" uid="uid://borcfcj3tnhqd" path="res://settings/settings.tscn" id="7_0cy3k"]
 [ext_resource type="Script" path="res://pomodoro/pomodoro_timer.gd" id="7_706jc"]
 [ext_resource type="PackedScene" uid="uid://coblg17d868dd" path="res://audio/audio_library.tscn" id="11_5aqv3"]
@@ -37,19 +38,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_i0xdb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
 [node name="TitleMarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_top = 100
+theme_override_constants/margin_top = 50
 
-[node name="Title" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+
+[node name="Settings" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_font_sizes/font_size = 50
+
+[node name="Title" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 1
+theme = ExtResource("6_i0xdb")
 theme_override_font_sizes/font_size = 50
 text = "POMODORO"
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Inputs" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("2_cj480")]
 unique_name_in_owner = true

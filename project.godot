@@ -13,6 +13,7 @@ config_version=5
 config/name="Custom Pomodoro"
 run/main_scene="res://pomodoro/pomodoro.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/bg_color=Color(0.345098, 0.505882, 0.341176, 1)
 boot_splash/image="res://icon/pomodoro_splash.png"
 config/icon="res://icon/pomodoro_icon.png"
 config/windows_native_icon="res://icon/pomodoro_icon_biggest.ico"
@@ -26,3 +27,8 @@ Paths="*res://autoload/paths.gd"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_resource_groups/plugin.cfg")
+
+[gui]
+
+theme/custom="res://ui/theme/pomodoro_theme.tres"
+theme/custom_font="res://ui/theme/Inter_18pt-SemiBold.ttf"

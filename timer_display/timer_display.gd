@@ -9,6 +9,7 @@ var pomodoro_timer: PomodoroTimer
 @onready var stop_button: Button = %StopButton
 @onready var texture_progress_bar: TextureProgressBar = %TextureProgressBar
 @onready var time_remaining: Label = %TimeRemaining
+@onready var time: Label = %Time
 
 
 func _ready() -> void:
@@ -30,17 +31,13 @@ func inject_timer(p_pomodoro_timer: PomodoroTimer) -> void:
 
 func _on_submit_time(time_seconds: float) -> void:
 	texture_progress_bar.value = 0
-	time_remaining.text = (
-		"Time remaining: "
-		+ convert_seconds_to_time(time_seconds)
-	)
+	time.text = convert_seconds_to_time(time_seconds)
 
 
 func _on_pomodoro_timeout() -> void:
 	texture_progress_bar.value = pomodoro_timer.percent_complete
-	time_remaining.text = (
-		"Time remaining: "
-		+ convert_seconds_to_time(pomodoro_timer.seconds_remaining)
+	time.text = convert_seconds_to_time(
+		pomodoro_timer.seconds_remaining
 	)
 
 
@@ -55,10 +52,7 @@ func _on_pause_button_pressed() -> void:
 func _on_reset_button_pressed() -> void:
 	pomodoro_timer.elapsed_seconds = 0
 	texture_progress_bar.value = 0
-	time_remaining.text = (
-		"Time remaining: "
-		+ convert_seconds_to_time(pomodoro_timer.total_seconds)
-	)
+	time.text = convert_seconds_to_time(pomodoro_timer.total_seconds)
 	pomodoro_timer.paused = true
 	pause_button.text = "Paused"
 
