@@ -43,27 +43,11 @@ theme = ExtResource("6_i0xdb")
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/PanelContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("6_i0xdb")
-
 [node name="TitleMarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 50
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer"]
-layout_mode = 2
-
-[node name="Settings" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme_override_font_sizes/font_size = 50
-
-[node name="Title" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer/HBoxContainer"]
+[node name="Title" type="Label" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 1
@@ -71,23 +55,21 @@ theme = ExtResource("6_i0xdb")
 theme_override_font_sizes/font_size = 50
 text = "POMODORO"
 
-[node name="Control" type="Control" parent="CanvasLayer/PanelContainer/VBoxContainer/TitleMarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="Inputs" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("2_cj480")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="SettingsContainer" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("7_0cy3k")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="TimerDisplay" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("3_0ex4r")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+size_flags_horizontal = 1
+size_flags_vertical = 3
 
 [node name="Finished" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("4_qmnea")]
 unique_name_in_owner = true

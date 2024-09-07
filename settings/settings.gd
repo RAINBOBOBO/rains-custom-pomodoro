@@ -6,13 +6,12 @@ signal sound_names_requested
 var state_machine: StateMachine
 
 # containers
-@onready var menu_container: SettingsMenuContainer = $MenuContainer
-@onready var audio_container: AudioContainer = $AudioContainer
+@export var containers: Control
+@export var audio_container: AudioContainer
 
 # states
-@onready var states: Node = $States
-@onready var menu: MenuSettingsState = $States/Menu
-@onready var audio: AudioSettingsState = $States/Audio
+@export var states: Node
+@export var audio: AudioSettingsState
 
 
 func _ready() -> void:
@@ -20,7 +19,7 @@ func _ready() -> void:
 		setup_state(settings_state)
 
 	state_machine = StateMachine.new()
-	set_state(menu)
+	set_state(audio)
 
 
 func exit_settings() -> void:
@@ -28,8 +27,8 @@ func exit_settings() -> void:
 
 
 func hide_all() -> void:
-	menu_container.visible = false
-	audio_container.visible = false
+	for container in containers.get_children():
+		container.visible = false
 
 
 func set_sound_names(sound_names: Array[String]) -> void:
@@ -44,3 +43,7 @@ func set_state(next_state: SettingsState) -> void:
 func setup_state(settings_state: SettingsState) -> void:
 	settings_state.state_manager = self
 	settings_state.setup_settings_state()
+
+
+func _on_escape_pressed() -> void:
+	exit_settings()

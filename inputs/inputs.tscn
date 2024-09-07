@@ -13,14 +13,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -131.0
-offset_top = -201.5
-offset_right = 131.0
-offset_bottom = 201.5
+offset_left = -159.0
+offset_top = -218.5
+offset_right = 159.0
+offset_bottom = 218.5
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 3
+theme = ExtResource("4_7q5nq")
 script = ExtResource("1_w5p0o")
 
 [node name="States" type="Node" parent="."]

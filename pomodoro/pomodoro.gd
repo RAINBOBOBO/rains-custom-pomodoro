@@ -27,6 +27,7 @@ func _ready() -> void:
 	_inject_dependencies()
 	timer_display.inject_timer(pomodoro_timer)
 
+	hide_all()
 	state_machine.set_state(time_input)
 
 

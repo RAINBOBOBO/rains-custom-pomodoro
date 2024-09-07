@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy6kh8umesf60"
-path="res://.godot/imported/pomodoro_icon_biggest.png-90942412e186cd6d11ab8b232f89e6bc.ctex"
+uid="uid://cmmnvnf7pfyol"
+path="res://.godot/imported/escape_graphic_hover.png-8979e6287fd49d987bc5a35189bfa8a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon/pomodoro_icon_biggest.png"
-dest_files=["res://.godot/imported/pomodoro_icon_biggest.png-90942412e186cd6d11ab8b232f89e6bc.ctex"]
+source_file="res://images/buttons/escape_graphic_hover.png"
+dest_files=["res://.godot/imported/escape_graphic_hover.png-8979e6287fd49d987bc5a35189bfa8a7.ctex"]
 
 [params]
 

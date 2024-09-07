@@ -2,7 +2,7 @@ class_name AudioContainer extends VBoxContainer
 
 signal back_pressed
 
-@export var alarm_sound_menu: PopupMenu
+@export var alarm_sound_menu: OptionButton
 @export var sample_button: Button
 @export var stop_button: Button
 
@@ -10,7 +10,7 @@ var sound_name_to_id: Array[SoundNameMap]
 
 
 func _ready() -> void:
-	alarm_sound_menu.id_pressed.connect(_on_alarm_sound_id_pressed)
+	alarm_sound_menu.item_selected.connect(_on_alarm_sound_id_pressed)
 	var audio_settings: Dictionary = ConfigFileHandler.load_settings(
 		ConfigFileHandler.ConfigSections.AUDIO
 	)
