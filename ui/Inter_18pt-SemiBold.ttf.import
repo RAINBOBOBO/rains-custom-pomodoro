@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://wyl3t8vnc5jf"
-path="res://.godot/imported/Inter_18pt-SemiBold.ttf-b343b9bcc22844bca9fac7ad0bd8625e.fontdata"
+path="res://.godot/imported/Inter_18pt-SemiBold.ttf-62a4d0e7a92e18dbec3d8a94c3987208.fontdata"
 
 [deps]
 
-source_file="res://ui/theme/Inter_18pt-SemiBold.ttf"
-dest_files=["res://.godot/imported/Inter_18pt-SemiBold.ttf-b343b9bcc22844bca9fac7ad0bd8625e.fontdata"]
+source_file="res://ui/Inter_18pt-SemiBold.ttf"
+dest_files=["res://.godot/imported/Inter_18pt-SemiBold.ttf-62a4d0e7a92e18dbec3d8a94c3987208.fontdata"]
 
 [params]
 

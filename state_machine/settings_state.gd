@@ -1,8 +1,10 @@
 class_name SettingsState extends State
 
+@export var container: VBoxContainer
+@export var section_button: Button
+
 var state_manager: VBoxContainer
-var container: VBoxContainer
 
 
-func setup_settings_state() -> void:
-	pass
+func enter() -> void:
+	container.visible = true

@@ -25,7 +25,9 @@ func _get_section_setting_string(settings_section: ConfigSections) -> String:
 
 func _set_config_defaults() -> void:
 	config.set_value("audio", "timer_complete_sound", "MorningAlarm")
-	config.set_value("audio", "master_volume", 1.0)
+	config.set_value("audio", "Master_volume", 1)
+	config.set_value("audio", "music_volume", 1)
+	config.set_value("audio", "sfx_volume", 1)
 
 	config.save(Paths.SETTINGS_FILE_PATH)
 

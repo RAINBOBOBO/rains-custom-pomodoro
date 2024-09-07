@@ -1,18 +1,37 @@
-[gd_scene load_steps=12 format=3 uid="uid://borcfcj3tnhqd"]
+[gd_scene load_steps=16 format=3 uid="uid://borcfcj3tnhqd"]
 
 [ext_resource type="Script" path="res://settings/settings.gd" id="1_t70is"]
 [ext_resource type="Script" path="res://settings/states/audio.gd" id="2_h02kv"]
 [ext_resource type="Script" path="res://state_machine/settings_state.gd" id="3_45avs"]
-[ext_resource type="Theme" uid="uid://bdgepf6ihjxwe" path="res://ui/theme/settings_title_theme.tres" id="5_1qlx3"]
+[ext_resource type="Theme" uid="uid://bdgepf6ihjxwe" path="res://ui/themes/settings_title_theme.tres" id="5_1qlx3"]
 [ext_resource type="Script" path="res://settings/audio_container.gd" id="5_7ujaw"]
-[ext_resource type="Theme" uid="uid://dlfs0lfwdl12i" path="res://ui/theme/pomodoro_theme.tres" id="6_43vsq"]
-[ext_resource type="Theme" uid="uid://c0bkohc3cgehc" path="res://ui/theme/settings_theme.tres" id="6_uhe2w"]
+[ext_resource type="Script" path="res://settings/section_titles.gd" id="5_ej2kr"]
+[ext_resource type="Theme" uid="uid://dlfs0lfwdl12i" path="res://ui/themes/pomodoro_theme.tres" id="6_43vsq"]
+[ext_resource type="Theme" uid="uid://c0bkohc3cgehc" path="res://ui/themes/settings_theme.tres" id="6_uhe2w"]
 [ext_resource type="Texture2D" uid="uid://c11qk7bfkcx2r" path="res://images/buttons/escape_graphic.png" id="7_bwfm5"]
-[ext_resource type="StyleBox" uid="uid://bhuenoh3t2800" path="res://ui/theme/neutral_style_box.tres" id="7_ocq1v"]
+[ext_resource type="StyleBox" uid="uid://bhuenoh3t2800" path="res://ui/style_boxes/neutral_style_box.tres" id="7_ocq1v"]
 [ext_resource type="Texture2D" uid="uid://buhi5n0ka2g44" path="res://images/buttons/escape_graphic_pressed.png" id="8_gk25t"]
+[ext_resource type="PackedScene" uid="uid://baku4b0tcwrsk" path="res://audio/volume_slider.tscn" id="9_guipt"]
 [ext_resource type="Texture2D" uid="uid://cmmnvnf7pfyol" path="res://images/buttons/escape_graphic_hover.png" id="9_unu8w"]
 
-[node name="Settings" type="VBoxContainer" node_paths=PackedStringArray("containers", "audio_container", "states", "audio")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5wfl"]
+bg_color = Color(0.639216, 0.694118, 0.541176, 1)
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+expand_margin_left = 50.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1jnr"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.639216, 0.694118, 0.541176, 1)
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+expand_margin_left = 500.0
+
+[node name="Settings" type="VBoxContainer" node_paths=PackedStringArray("containers", "audio_container", "section_titles", "states", "audio", "video", "appearance", "personalization")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -25,29 +44,44 @@ alignment = 1
 script = ExtResource("1_t70is")
 containers = NodePath("HBoxContainer/Controls")
 audio_container = NodePath("HBoxContainer/Controls/AudioContainer")
+section_titles = NodePath("HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox")
 states = NodePath("States")
 audio = NodePath("States/Audio")
+video = NodePath("States/Video")
+appearance = NodePath("States/Appearance")
+personalization = NodePath("States/Personalization")
 
 [node name="States" type="Node" parent="."]
 
-[node name="Audio" type="Node" parent="States"]
+[node name="Audio" type="Node" parent="States" node_paths=PackedStringArray("container", "section_button")]
 script = ExtResource("2_h02kv")
+container = NodePath("../../HBoxContainer/Controls/AudioContainer")
+section_button = NodePath("../../HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer/AudioSection")
 
-[node name="Video" type="Node" parent="States"]
+[node name="Video" type="Node" parent="States" node_paths=PackedStringArray("container", "section_button")]
 script = ExtResource("3_45avs")
+container = NodePath("../../HBoxContainer/Controls/VideoContainer")
+section_button = NodePath("../../HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer2/VideoSection")
 
-[node name="Appearance" type="Node" parent="States"]
+[node name="Appearance" type="Node" parent="States" node_paths=PackedStringArray("container", "section_button")]
 script = ExtResource("3_45avs")
+container = NodePath("../../HBoxContainer/Controls/AppearanceContainer")
+section_button = NodePath("../../HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer3/AppearanceSection")
 
-[node name="Personalization" type="Node" parent="States"]
+[node name="Personalization" type="Node" parent="States" node_paths=PackedStringArray("container", "section_button")]
 script = ExtResource("3_45avs")
+container = NodePath("../../HBoxContainer/Controls/PersonalizationContainer")
+section_button = NodePath("../../HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer4/PersonalizationSection")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("6_43vsq")
+alignment = 1
 
 [node name="SectionTitles" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(352, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -55,10 +89,17 @@ size_flags_horizontal = 3
 layout_mode = 2
 theme_override_constants/margin_left = 40
 
-[node name="SectionTitlesVBox" type="VBoxContainer" parent="HBoxContainer/SectionTitles/MarginContainer"]
+[node name="SectionTitlesVBox" type="VBoxContainer" parent="HBoxContainer/SectionTitles/MarginContainer" node_paths=PackedStringArray("selected_panel", "hover_panel", "audio_button", "video_button", "appearance_button", "personalization_button")]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("6_43vsq")
+script = ExtResource("5_ej2kr")
+selected_panel = NodePath("SelectedPanel")
+hover_panel = NodePath("../../../Panels/HoverPanel")
+audio_button = NodePath("MarginContainer/AudioSection")
+video_button = NodePath("MarginContainer2/VideoSection")
+appearance_button = NodePath("MarginContainer3/AppearanceSection")
+personalization_button = NodePath("MarginContainer4/PersonalizationSection")
 
 [node name="SettingsTitleContainer" type="MarginContainer" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
 layout_mode = 2
@@ -69,29 +110,63 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 45
 text = "Settings"
 
-[node name="AudioSection" type="Button" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
 layout_mode = 2
-size_flags_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AudioSection" type="Button" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer"]
+z_index = 1
+layout_mode = 2
 theme = ExtResource("5_1qlx3")
+toggle_mode = true
+button_pressed = true
 text = "Audio"
+alignment = 0
 
-[node name="VideoSection" type="Button" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
 layout_mode = 2
-size_flags_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VideoSection" type="Button" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer2"]
+z_index = 1
+layout_mode = 2
 theme = ExtResource("5_1qlx3")
+toggle_mode = true
 text = "Video"
+alignment = 0
 
-[node name="AppearanceSection" type="Button" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
 layout_mode = 2
-size_flags_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="AppearanceSection" type="Button" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer3"]
+z_index = 1
+layout_mode = 2
 theme = ExtResource("5_1qlx3")
+toggle_mode = true
 text = "Appearance"
+alignment = 0
 
-[node name="PersonalizationSection" type="Button" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
 layout_mode = 2
-size_flags_horizontal = 0
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PersonalizationSection" type="Button" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer4"]
+z_index = 1
+layout_mode = 2
 theme = ExtResource("5_1qlx3")
+toggle_mode = true
 text = "Personalization"
+alignment = 0
+
+[node name="SelectedPanel" type="Panel" parent="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u5wfl")
 
 [node name="Controls" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
@@ -100,12 +175,15 @@ size_flags_stretch_ratio = 1.25
 theme = ExtResource("6_uhe2w")
 theme_override_styles/panel = ExtResource("7_ocq1v")
 
-[node name="AudioContainer" type="VBoxContainer" parent="HBoxContainer/Controls" node_paths=PackedStringArray("alarm_sound_menu", "sample_button", "stop_button")]
+[node name="AudioContainer" type="VBoxContainer" parent="HBoxContainer/Controls" node_paths=PackedStringArray("alarm_sound_option", "sample_button", "stop_button", "volume_slider", "volume_label")]
+visible = false
 layout_mode = 2
 script = ExtResource("5_7ujaw")
-alarm_sound_menu = NodePath("MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/AlarmSoundRow/HBoxContainer/MarginContainer2/OptionButton")
+alarm_sound_option = NodePath("MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/AlarmSoundRow/HBoxContainer/MarginContainer2/OptionButton")
 sample_button = NodePath("MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/AlarmSoundRow/HBoxContainer/PanelContainer/SampleButton")
 stop_button = NodePath("MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/AlarmSoundRow/HBoxContainer/PanelContainer/StopButton")
+volume_slider = NodePath("MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/VolumeContainer/HBoxContainer/MarginContainer2/VolumeSlider")
+volume_label = NodePath("MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/VolumeContainer/HBoxContainer/MarginContainer3/VolumeAmountLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/Controls/AudioContainer"]
 layout_mode = 2
@@ -149,22 +227,19 @@ text = "Volume"
 [node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/VolumeContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
+size_flags_stretch_ratio = 8.0
 
-[node name="VolumeSlider" type="HSlider" parent="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/VolumeContainer/HBoxContainer/MarginContainer2"]
+[node name="VolumeSlider" parent="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/VolumeContainer/HBoxContainer/MarginContainer2" instance=ExtResource("9_guipt")]
 layout_mode = 2
-size_flags_vertical = 1
-theme = ExtResource("6_uhe2w")
-value = 75.0
-rounded = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/VolumeContainer/HBoxContainer"]
+custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VolumeAmountLabel" type="Label" parent="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/VolumeContainer/HBoxContainer/MarginContainer3"]
 layout_mode = 2
-text = "75"
+text = "100"
 
 [node name="AlarmSoundRow" type="MarginContainer" parent="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -193,7 +268,6 @@ size_flags_stretch_ratio = 2.5
 [node name="OptionButton" type="OptionButton" parent="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/AlarmSoundRow/HBoxContainer/MarginContainer2"]
 layout_mode = 2
 theme = ExtResource("6_uhe2w")
-selected = 0
 fit_to_longest_item = false
 allow_reselect = true
 
@@ -215,7 +289,56 @@ focus_mode = 0
 theme = ExtResource("6_uhe2w")
 text = "Stop"
 
+[node name="VideoContainer" type="VBoxContainer" parent="HBoxContainer/Controls"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Controls/VideoContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Video Settings"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/Controls/VideoContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Coming Soon!!"
+horizontal_alignment = 1
+
+[node name="AppearanceContainer" type="VBoxContainer" parent="HBoxContainer/Controls"]
+visible = false
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/Controls/AppearanceContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Appearance Settings"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/Controls/AppearanceContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Coming Soon!!"
+horizontal_alignment = 1
+
+[node name="PersonalizationContainer" type="VBoxContainer" parent="HBoxContainer/Controls"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer/Controls/PersonalizationContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Personalization Settings"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Label" type="Label" parent="HBoxContainer/Controls/PersonalizationContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Coming Soon!!"
+horizontal_alignment = 1
+
 [node name="EscapeBar" type="PanelContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(352, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -245,6 +368,26 @@ theme_override_constants/margin_left = 6
 layout_mode = 2
 text = "ESC"
 
+[node name="Panels" type="Node" parent="HBoxContainer"]
+
+[node name="HoverPanel" type="Panel" parent="HBoxContainer/Panels"]
+custom_minimum_size = Vector2(0, 56)
+theme_override_styles/panel = SubResource("StyleBoxFlat_s1jnr")
+
+[connection signal="visibility_changed" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" to="." method="_on_section_titles_v_box_visibility_changed"]
+[connection signal="mouse_entered" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer/AudioSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_audio_section_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer/AudioSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_audio_section_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer/AudioSection" to="." method="_on_audio_section_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer2/VideoSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_video_section_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer2/VideoSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_video_section_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer2/VideoSection" to="." method="_on_video_section_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer3/AppearanceSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_appearance_section_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer3/AppearanceSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_appearance_section_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer3/AppearanceSection" to="." method="_on_appearance_section_pressed"]
+[connection signal="mouse_entered" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer4/PersonalizationSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_personalization_section_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer4/PersonalizationSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_personalization_section_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer4/PersonalizationSection" to="." method="_on_personalization_section_pressed"]
+[connection signal="value_changed" from="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/VolumeContainer/HBoxContainer/MarginContainer2/VolumeSlider" to="HBoxContainer/Controls/AudioContainer" method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/AlarmSoundRow/HBoxContainer/PanelContainer/SampleButton" to="HBoxContainer/Controls/AudioContainer" method="_on_sample_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/Controls/AudioContainer/MarginContainer/PanelContainer/SettingsControlMarginContainer/VBoxContainer/AlarmSoundRow/HBoxContainer/PanelContainer/StopButton" to="HBoxContainer/Controls/AudioContainer" method="_on_stop_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/EscapeBar/MarginContainer/VBoxContainer/Escape" to="." method="_on_escape_pressed"]

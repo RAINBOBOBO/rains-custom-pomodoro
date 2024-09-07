@@ -1,22 +1,25 @@
 [gd_resource type="Theme" load_steps=7 format=3 uid="uid://bdgepf6ihjxwe"]
 
-[ext_resource type="FontFile" uid="uid://wyl3t8vnc5jf" path="res://ui/theme/Inter_18pt-SemiBold.ttf" id="1_20s7i"]
-[ext_resource type="StyleBox" uid="uid://j05bbm0qknpn" path="res://ui/theme/dark1_style_box.tres" id="2_wdat4"]
-[ext_resource type="StyleBox" uid="uid://bhuenoh3t2800" path="res://ui/theme/neutral_style_box.tres" id="3_oia3j"]
-[ext_resource type="StyleBox" uid="uid://da38v2y1tohnu" path="res://ui/theme/dark2_style_box.tres" id="4_06rmp"]
+[ext_resource type="FontFile" uid="uid://wyl3t8vnc5jf" path="res://ui/Inter_18pt-SemiBold.ttf" id="1_sgrqd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6rrxj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_blu0i"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1i7ll"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3icmk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6djfw"]
+
 [resource]
 Button/colors/font_color = Color(0.854902, 0.843137, 0.803922, 1)
 Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 Button/colors/font_focus_color = Color(0.854902, 0.843137, 0.803922, 1)
-Button/colors/font_hover_color = Color(0.854902, 0.843137, 0.803922, 1)
+Button/colors/font_hover_color = Color(0.639216, 0.694118, 0.541176, 1)
 Button/colors/font_hover_pressed_color = Color(0.854902, 0.843137, 0.803922, 1)
 Button/colors/font_outline_color = Color(0.854902, 0.843137, 0.803922, 1)
-Button/colors/font_pressed_color = Color(0.854902, 0.843137, 0.803922, 1)
+Button/colors/font_pressed_color = Color(0.227451, 0.352941, 0.25098, 1)
 Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
 Button/colors/icon_focus_color = Color(1, 1, 1, 1)
 Button/colors/icon_hover_color = Color(1, 1, 1, 1)
@@ -27,9 +30,9 @@ Button/constants/h_separation = 4
 Button/constants/icon_max_width = 0
 Button/constants/outline_size = 0
 Button/font_sizes/font_size = 30
-Button/fonts/font = ExtResource("1_20s7i")
+Button/fonts/font = ExtResource("1_sgrqd")
 Button/styles/disabled = SubResource("StyleBoxEmpty_6rrxj")
 Button/styles/focus = SubResource("StyleBoxEmpty_blu0i")
-Button/styles/hover = ExtResource("2_wdat4")
-Button/styles/normal = ExtResource("3_oia3j")
-Button/styles/pressed = ExtResource("4_06rmp")
+Button/styles/hover = SubResource("StyleBoxEmpty_1i7ll")
+Button/styles/normal = SubResource("StyleBoxEmpty_3icmk")
+Button/styles/pressed = SubResource("StyleBoxEmpty_6djfw")

@@ -18,6 +18,10 @@ boot_splash/image="res://images/icon/pomodoro_splash.png"
 config/icon="res://images/icon/pomodoro_icon_biggest.png"
 config/windows_native_icon="res://images/icon/pomodoro_icon_biggest.ico"
 
+[audio]
+
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
+
 [autoload]
 
 EventBus="*res://autoload/event_bus.gd"
@@ -30,5 +34,5 @@ enabled=PackedStringArray("res://addons/godot_resource_groups/plugin.cfg")
 
 [gui]
 
-theme/custom="res://ui/theme/pomodoro_theme.tres"
-theme/custom_font="res://ui/theme/Inter_18pt-SemiBold.ttf"
+theme/custom="res://ui/themes/pomodoro_theme.tres"
+theme/custom_font="res://ui/Inter_18pt-SemiBold.ttf"

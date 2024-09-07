@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bww3xuq5mrqhp" path="res://finished/finished.tscn" id="4_qmnea"]
 [ext_resource type="Script" path="res://pomodoro/states/timer_complete.gd" id="5_5rreq"]
 [ext_resource type="Script" path="res://pomodoro/states/settings.gd" id="5_sxa6d"]
-[ext_resource type="Theme" uid="uid://dlfs0lfwdl12i" path="res://ui/theme/pomodoro_theme.tres" id="6_i0xdb"]
+[ext_resource type="Theme" uid="uid://dlfs0lfwdl12i" path="res://ui/themes/pomodoro_theme.tres" id="6_i0xdb"]
 [ext_resource type="PackedScene" uid="uid://borcfcj3tnhqd" path="res://settings/settings.tscn" id="7_0cy3k"]
 [ext_resource type="Script" path="res://pomodoro/pomodoro_timer.gd" id="7_706jc"]
 [ext_resource type="PackedScene" uid="uid://coblg17d868dd" path="res://audio/audio_library.tscn" id="11_5aqv3"]
@@ -62,6 +62,7 @@ layout_mode = 2
 
 [node name="SettingsContainer" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("7_0cy3k")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="TimerDisplay" parent="CanvasLayer/PanelContainer/VBoxContainer" instance=ExtResource("3_0ex4r")]
