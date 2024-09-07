@@ -4,7 +4,6 @@ signal settings_complete
 signal sound_names_requested
 
 var state_machine: StateMachine
-var first_time_setup: bool = false
 
 # containers
 @export var containers: Control
@@ -25,7 +24,12 @@ func _ready() -> void:
 
 	state_machine = StateMachine.new()
 	set_state(audio)
-	first_time_setup = true
+
+
+func _process(delta: float) -> void:
+	section_titles.move_selected_panel_to_button(
+		state_machine.state.section_button,
+	)
 
 
 func exit_settings() -> void:
@@ -71,10 +75,3 @@ func _on_appearance_section_pressed() -> void:
 
 func _on_personalization_section_pressed() -> void:
 	set_state(personalization)
-
-
-func _on_section_titles_v_box_visibility_changed() -> void:
-	if not first_time_setup:
-		return
-
-	section_titles.toggle_button(state_machine.state.section_button)

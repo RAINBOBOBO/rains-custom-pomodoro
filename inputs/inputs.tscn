@@ -58,6 +58,7 @@ theme = ExtResource("4_7q5nq")
 
 [node name="TimeBoxHours" parent="TimeInputContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
 [node name="TimeBoxMins" parent="TimeInputContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_qx6lt")]

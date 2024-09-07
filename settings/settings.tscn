@@ -374,7 +374,7 @@ text = "ESC"
 custom_minimum_size = Vector2(0, 56)
 theme_override_styles/panel = SubResource("StyleBoxFlat_s1jnr")
 
-[connection signal="visibility_changed" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" to="." method="_on_section_titles_v_box_visibility_changed"]
+[connection signal="draw" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" to="." method="_on_section_titles_v_box_draw"]
 [connection signal="mouse_entered" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer/AudioSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_audio_section_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer/AudioSection" to="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox" method="_on_audio_section_mouse_exited"]
 [connection signal="pressed" from="HBoxContainer/SectionTitles/MarginContainer/SectionTitlesVBox/MarginContainer/AudioSection" to="." method="_on_audio_section_pressed"]
